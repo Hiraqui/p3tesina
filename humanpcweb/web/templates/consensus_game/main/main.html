@@ -1,0 +1,113 @@
+
+<div id="loading_level">
+  <div id="inner_loading_level">
+    <div id="progressbar">
+      <span id="loading_percentage" class="loading_percentage">
+      </span>
+    </div>
+  </div>
+</div> 
+<div id="game">
+  <div class="game_table">
+    {% include  "consensus_game/main/admin_information.html" %}
+    <div id="game_top">
+      <div class="first_row">
+        <div class="nivel_container">
+          <span class="totalScore">Nivel</span>
+          <span  class="otherscore" id="user_level"></span>
+          <div id="customContainer" class="help_container">
+            <img src="{{STATIC_URL}}images/tutorial.png" style="cursor:pointer" id="tutorialImage" alt="Ayuda"/>
+          </div>	
+        </div>
+        <div class="aciertos_container">
+          <span class="totalScore">Aciertos totales</span>
+          <span  class="otherscore" id="avg_score" style="font-size:34px;"></span>
+        </div>
+        <div class="scoreBoard_container">
+          {% include "consensus_game/scoreBoard.html" with list1="0" list2="0123456789" %}
+        </div>	
+        <div style="clear:both"></div>
+      </div>
+    </div>
+    <div id="game_proteins">
+      <div class="protein_container_outter outter_protein0">
+        {% include "consensus_game/main/protein0.html" %}
+      </div>
+      <div class="second_row">
+        <div id="nextButtonContainer">
+          <a onclick="location.reload()"  style="cursor:pointer;" id="reload" class="classname recargar"><span class="reload_first"> ¿No se ve una proteína?<br></span>Recargar trío</a>
+          <a style="display:none; cursor:pointer;"  id="send" class="classname next">Siguiente  trío</a>
+        </div>
+        <div class="spin_container">
+          <input type="checkbox"  id="spin" checked="checked"/> 
+          <h4 style="color:#FFFFFF;text-align:center">Girar</h4>
+        </div>	
+      </div>
+      <div  class="protein_container_outter outter_protein1">
+        {% include "consensus_game/main/protein1.html" %}
+      </div>
+      <div class="protein_container_outter outter_protein2">                        
+        {% include "consensus_game/main/protein2.html" %}
+      </div>
+    </div>
+  </div>
+  <div style="display: hidden">
+    <form action="/game/play" method="post" id="game_type_form" style="display: inline;">
+      {% csrf_token %} 
+      <input type="hidden" value="" name="game_type" id="game_type">
+    </form>
+  </div>
+  <script type="text/javascript">
+      $(window).scroll(function(){
+      if ($(this).scrollTop() > 95) {
+          $('#loading_level').addClass('fixed');
+      } else {
+          $('#loading_level').removeClass('fixed');
+      }
+  });
+  </script>
+  <style type="text/css">
+    .recargar{
+      height:46px;
+      line-height:18px;
+      width:144px;
+    }
+    .next{
+      height:33px;
+      line-height:33px;
+      width:113px;}
+    .classname {
+      -moz-box-shadow:inset 0px 1px 0px 0px #ffffff;
+      -webkit-box-shadow:inset 0px 1px 0px 0px #ffffff;
+      box-shadow:inset 0px 1px 0px 0px #ffffff;
+      background-color:#ededed;
+      -webkit-border-top-left-radius:6px;
+      -moz-border-radius-topleft:6px;
+      border-top-left-radius:6px;
+      -webkit-border-top-right-radius:6px;
+      -moz-border-radius-topright:6px;
+      border-top-right-radius:6px;
+      -webkit-border-bottom-right-radius:6px;
+      -moz-border-radius-bottomright:6px;
+      border-bottom-right-radius:6px;
+      -webkit-border-bottom-left-radius:6px;
+      -moz-border-radius-bottomleft:6px;
+      border-bottom-left-radius:6px;
+      text-indent:0;
+      border:1px solid #666066;
+      display:inline-block;
+      color:#000000;
+      font-family:arial;
+      font-size:11px;
+      font-weight:bold;
+      font-style:normal;
+
+      text-decoration:none;
+      text-align:center;
+      text-shadow:1px 1px 0px #ffffff;
+    }.classname:hover {
+      background-color:#dfdfdf;
+    }.classname:active {
+      position:relative;
+      top:1px;
+    }</style>
